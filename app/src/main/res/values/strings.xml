@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GSB</string>
+    <string name="accueil">Bienvenue sur GSB</string>
+    <string name="Dashboard">Bienvenue sur votre dashboard GSB</string>
 </resources>

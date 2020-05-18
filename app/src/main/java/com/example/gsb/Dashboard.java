@@ -37,21 +37,16 @@ public class Dashboard extends AppCompatActivity {
         if (intent != null) {
             //On définit les variables qui vont accueillir nos data
             String str = "";
-            String pwd = "";
 
             //Si dans notre intent on a des extras du nom de login et password alors
-            if ((intent.hasExtra("login")) && (intent.hasExtra("password"))){
+            if ((intent.hasExtra("login"))){
                 //On affecte leur contenus dans les variables créé à cet effet
                 str = intent.getStringExtra("login");
-                pwd = intent.getStringExtra("password");
             }
 
             //On initialise les valeurs sur les champs créé pour afin de les afficher
             TextView login = (TextView) findViewById(R.id.login_);
             login.setText(str);
-
-            TextView passwd = (TextView) findViewById(R.id.password_);
-            passwd.setText(pwd);
         }
     }
 }
