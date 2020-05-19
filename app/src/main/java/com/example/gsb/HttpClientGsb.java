@@ -14,8 +14,9 @@ public class HttpClientGsb {
 
     private String dataSend="";
 
-    // HTTP request
-    public String sendPost(String method, String url, Map<String, Object> parameters) throws Exception {
+    // requete HTTP
+    public String sendHttpRequest(String method, String url, Map<String, Object> parameters) throws Exception {
+        System.out.println("Début requete HTTP");
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -37,23 +38,28 @@ public class HttpClientGsb {
             i++;
         }
 
-        // Send post request
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+            // Traitement selon le type de requete
+        System.out.println("Methode : " + method);
+        if (method == "GET") {
+            con.setDoOutput(false);
+        } else {
+            con.setDoOutput(true);
+            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        wr.close();
+            wr.writeBytes(urlParameters);
+            wr.flush();
+            wr.close();
+        }
 
         int responseCode = con.getResponseCode();
 
         BufferedReader in = null;
         if (responseCode != HttpURLConnection.HTTP_OK) {
-            System.out.println("HTTP FAILED");
+            System.out.println("HTTP FAILED, CODE " + responseCode);
             in = new BufferedReader(
                     new InputStreamReader(con.getErrorStream()));
         } else {
-            System.out.println("HTTP OK");
+            System.out.println("HTTP OK, CODE " + responseCode);
             in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
         }
@@ -68,6 +74,10 @@ public class HttpClientGsb {
 
         //print result
         dataSend = response.toString();
+
+        System.out.println("Valeur retour requete : ");
+        System.out.println(dataSend);
+        System.out.println("Fin requete HTTP");
 
         return dataSend;
 

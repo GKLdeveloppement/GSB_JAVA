@@ -51,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 testParam.put("password", pwd);
                 //System.out.println(testParam);
                 try {
-                    API = httpClientTest.sendPost("POST", "http://198.50.173.145:8003/java_connexion", testParam);
-                    System.out.println(API);
+                    API = httpClientTest.sendHttpRequest("POST", "http://198.50.173.145:8003/java_connexion", testParam);
                     //Si le retour est true aors on donne l'accès en envoyant l'utilisateur sur l'accueil
                     if (API.equals("true")) {
                         //On génère un intent pour changer de fenetre
                         Intent otherActivity = new Intent(getApplicationContext(), Dashboard.class);
-                        //On demande à notre application de faire passer le login dans l'autre activité.
+                        //On demande à notre application de faire passer le login et l'id dans l'autre activité.
                         otherActivity.putExtra("login", loginGSB);
+                        otherActivity.putExtra("id", 3);
                         //On change de fenetre
                         startActivity(otherActivity);
                     } else {

@@ -26,11 +26,15 @@ import java.net.URL;
 public class Dashboard extends AppCompatActivity {
 
     private Button check_tableau;
+    private Button btnConsulteFiche;
+    private Integer idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        this.btnConsulteFiche = (Button) findViewById(R.id.btnConsulteFiche);
+
         //On récupère l'intent de la page principale
         Intent intent = getIntent();
         //On vérifie que l'intent n'est pas null par précaution
@@ -44,10 +48,25 @@ public class Dashboard extends AppCompatActivity {
                 str = intent.getStringExtra("login");
             }
 
+            if ((intent.hasExtra("id"))){
+                //On affecte leur contenus dans les variables créé à cet effet
+                idUser = intent.getIntExtra("id", 0);
+            }
+
             //On initialise les valeurs sur les champs créé pour afin de les afficher
             TextView login = (TextView) findViewById(R.id.login_);
             login.setText(str);
         }
+
+        btnConsulteFiche.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent otherActivity = new Intent(getApplicationContext(), consulteFiche.class);
+                otherActivity.putExtra("id", idUser);
+                startActivity(otherActivity);
+            }
+        });
+
     }
 }
 
