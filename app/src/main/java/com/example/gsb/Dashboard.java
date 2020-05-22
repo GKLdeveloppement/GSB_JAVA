@@ -12,12 +12,15 @@ public class Dashboard extends AppCompatActivity {
 
     private Button btnConsulteFiche;
     private String idUser;
+    private Button btnProfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        this.btnConsulteFiche = (Button) findViewById(R.id.btnConsulteFiche);
+
+        this.btnConsulteFiche = (Button) findViewById(R.id.dashboard_btn_consulte_fiche);
+        this.btnProfil = (Button) findViewById(R.id.dashboard_btn_profil);
 
         //On récupère l'intent de la page principale
         Intent intent = getIntent();
@@ -49,6 +52,16 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(otherActivity);
             }
         });
+
+        btnProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent otherActivity = new Intent(getApplicationContext(), Profil.class);
+                otherActivity.putExtra("id", idUser);
+                startActivity(otherActivity);
+            }
+        });
+
 
     }
 }

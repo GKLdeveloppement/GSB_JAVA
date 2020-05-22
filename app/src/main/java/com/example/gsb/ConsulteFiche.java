@@ -36,6 +36,7 @@ public class ConsulteFiche extends AppCompatActivity {
         setContentView(R.layout.activity_consulte_fiche);
         this.btnModifFiche = (Button) findViewById(R.id.btnModifFiche);
         this.moisEnCours = (TextView) findViewById(R.id.titreFicheFrais);
+
         Intent intent = getIntent();
         //On vérifie que l'intent n'est pas null par précaution
         if (intent != null) {
@@ -49,11 +50,11 @@ public class ConsulteFiche extends AppCompatActivity {
         String titreFiche = getString(R.string.titre_fiche_frais, nomMois[Calendar.getInstance().get(Calendar.MONTH)]);
         moisEnCours.setText(titreFiche);
 
-        HttpClientGsb httpClientTest = new HttpClientGsb();
+        HttpClientGsb httpClientFiche = new HttpClientGsb();
 
         Map<String, Object> paramGET = new HashMap<String, Object>();
         try {
-            String retourGet = httpClientTest.sendHttpRequest("GET", "http://198.50.173.145:8003/api/ficheuser?id=" + idUser, paramGET);
+            String retourGet = httpClientFiche.sendHttpRequest("GET", "http://198.50.173.145:8003/api/ficheuser?id=" + idUser, paramGET);
             this.listeNoteFrais = new JSONArray(retourGet);
             List<String> arrayLibelle = new ArrayList<>();
             List<Double> arrayMontant = new ArrayList<>();
