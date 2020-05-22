@@ -2,4 +2,5 @@
     <string name="app_name">GSB</string>
     <string name="accueil">Bienvenue sur GSB</string>
     <string name="Dashboard">Bienvenue sur votre dashboard GSB</string>
+    <string name="titre_fiche_frais">Fiche frais du mois %1$s</string>
 </resources>

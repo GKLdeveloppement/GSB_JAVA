@@ -25,9 +25,6 @@ public class HttpClientGsb {
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-
-        JSONObject params = new JSONObject();
-
         String urlParameters = "";
         int i = 1;
         for (Map.Entry<String, Object> entry : parameters.entrySet()) {

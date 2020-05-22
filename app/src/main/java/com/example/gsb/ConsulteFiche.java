@@ -1,15 +1,20 @@
 package com.example.gsb;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,13 +27,15 @@ public class ConsulteFiche extends AppCompatActivity {
     private Button btnModifFiche;
     private String idUser;
     private RecyclerView recyclerViewNotes;
+    private TextView moisEnCours;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulte_fiche);
         this.btnModifFiche = (Button) findViewById(R.id.btnModifFiche);
-
+        this.moisEnCours = (TextView) findViewById(R.id.titreFicheFrais);
         Intent intent = getIntent();
         //On vérifie que l'intent n'est pas null par précaution
         if (intent != null) {
@@ -37,6 +44,10 @@ public class ConsulteFiche extends AppCompatActivity {
                 idUser = intent.getStringExtra("id");
             }
         }
+
+        String[] nomMois= {"de Janvier","de Février","de Mars","d\'Avril","de Mai","de Juin","de Juillet","d\'Aout","de Septembre","de Octobre","de Novembre","de Décembre"};
+        String titreFiche = getString(R.string.titre_fiche_frais, nomMois[Calendar.getInstance().get(Calendar.MONTH)]);
+        moisEnCours.setText(titreFiche);
 
         HttpClientGsb httpClientTest = new HttpClientGsb();
 
